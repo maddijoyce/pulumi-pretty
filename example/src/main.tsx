@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 
-import { PulumiPretty } from "pulumi-pretty";
+import { Pretty } from "pulumi-pretty";
 import { Loading } from "pulumi-pretty/components/loading";
 import { Select } from "./select";
 
@@ -9,13 +9,11 @@ import "./main.css";
 
 const Main = () => {
   const [plan, setPlan] = useState<{
-    contents?: string;
     loading: boolean;
+    contents?: string;
     error?: string;
   }>({
-    contents: undefined,
     loading: true,
-    error: undefined,
   });
 
   useEffect(() => {
@@ -57,7 +55,7 @@ const Main = () => {
   }, []);
 
   if (plan.loading) return <Loading />;
-  if (plan.contents) return <PulumiPretty plan={plan.contents} />;
+  if (plan.contents) return <Pretty plan={plan.contents} />;
 
   return (
     <Select

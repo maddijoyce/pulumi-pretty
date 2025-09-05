@@ -85,6 +85,14 @@ export const Select = ({
           And, last but not least, you can use the component yourself however
           you want!
         </Text>
+        <a href="https://www.npmjs.com/package/pulumi-pretty" target="_blank">
+          <img src="https://img.shields.io/npm/v/pulumi-pretty" />
+        </a>
+        <Divider />
+        <Text>
+          Just in case you're worried, all the processing happens locally. Your
+          data isn't going anywhere.
+        </Text>
       </div>
     </div>
   );
