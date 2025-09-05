@@ -2,7 +2,6 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-import localPath from "./../local/preview.json";
 import { resolve } from "path";
 
 export default defineConfig({
@@ -10,18 +9,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "pulumi-pretty": resolve(__dirname, "../src"),
-    },
-  },
-  server: {
-    proxy: {
-      "/preview.json": {
-        target: "localhost",
-        bypass: (_, res) => {
-          res?.writeHead(200, { "Content-Type": "application/json" });
-          res?.write(JSON.stringify(localPath));
-          res?.end();
-        },
-      },
     },
   },
 });

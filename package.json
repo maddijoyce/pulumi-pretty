@@ -7,7 +7,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "demo": "vite example",
+    "dev": "vite example",
+    "bundle": "vite build example",
     "prebuild": "rm -rf dist"
   },
   "author": "Maddi Joyce <maddi@maddijoyce.com>",
