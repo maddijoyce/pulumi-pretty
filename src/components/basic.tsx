@@ -1,5 +1,5 @@
 import Editor from "@monaco-editor/react";
-import { useMediaQuery } from "../utils/media";
+import { useMedia } from "../utils/media";
 import { ErrorMessage, Field } from "./fieldset";
 import { Heading, Subheading } from "./heading";
 
@@ -10,7 +10,7 @@ export const BasicDisplay = ({
   error?: string;
   plan: string;
 }) => {
-  const isDark = useMediaQuery("(prefers-color-scheme: dark)");
+  const { isDark } = useMedia();
 
   return (
     <div className="p-4 flex flex-col gap-4 h-full">

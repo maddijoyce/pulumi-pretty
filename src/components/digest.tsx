@@ -1,10 +1,16 @@
-import { PreviewDigest } from "../utils/parse";
-import { DigestSummary } from "./digest-summary";
+import { PreviewDisplay } from "../utils/parse";
+import { Changes } from "./changes";
+import { Divider } from "./divider";
+import { Heading } from "./heading";
+import { Summary } from "./summary";
 
-export const DigestDisplay = ({ digest }: { digest: PreviewDigest }) => {
+export const DigestDisplay = ({ preview }: { preview: PreviewDisplay }) => {
   return (
-    <div className="container mx-auto p-4 flex flex-col gap-4">
-      {digest.changeSummary && <DigestSummary changes={digest.changeSummary} />}
+    <div className="container mx-auto p-4 flex flex-col gap-6">
+      <Heading level={1}>Plan Summary</Heading>
+      {preview.changeSummary && <Summary changes={preview.changeSummary} />}
+      <Divider />
+      <Changes steps={preview.steps || []} />
     </div>
   );
 };

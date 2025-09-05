@@ -77,12 +77,18 @@ export type PreviewDiagnostic = z.infer<typeof previewDiagnostic>;
  * Note: oldState/newState are apitype.ResourceV3 in Go. If you want to validate them,
  * plug in a dedicated schema; for now we accept any JSON shape.
  */
+export const stateObject = z.object({
+  id: z.string().optional(),
+  type: z.string(),
+});
+export type StateObject = z.infer<typeof stateObject>;
+
 export const previewStep = z.object({
   op: stepOp, // StepOp with fallback
   urn: z.string(), // resource.URN serialized as string
   provider: z.string().optional(),
-  oldState: z.unknown().optional(), // apitype.ResourceV3 (opaque here)
-  newState: z.unknown().optional(), // apitype.ResourceV3 (opaque here)
+  oldState: stateObject.optional(),
+  newState: stateObject.optional(),
   diffReasons: z.array(z.string()).optional(), // []resource.PropertyKey
   replaceReasons: z.array(z.string()).optional(),
   detailedDiff: z.record(z.string(), propertyDiff).optional().nullable(), // map[string]PropertyDiff
@@ -115,3 +121,32 @@ export type PreviewDigest = z.infer<typeof previewDigest>;
 
 export const parsePreviewDigest = (input: unknown): PreviewDigest =>
   previewDigest.parse(input);
+
+export const mapPreviewDigest = (input: PreviewDigest) => ({
+  changeSummary: input.changeSummary,
+  steps:
+    input.steps?.map(({ op, urn, newState, oldState, diffReasons }) => {
+      const id = newState?.id || oldState?.id || urn.split("::").pop();
+      const [provider, libraryFull, resource] = (
+        newState?.type ||
+        oldState?.type ||
+        ""
+      ).split(":");
+      const [library, libraryPart] = (libraryFull || "").split("/");
+
+      return {
+        id,
+        provider,
+        library,
+        libraryPart,
+        resource,
+        urn,
+        op,
+        diffReasons,
+      };
+    }) || [],
+});
+
+export type PreviewDisplay = ReturnType<typeof mapPreviewDigest>;
+
+export type PreviewDisplayStep = PreviewDisplay["steps"][number];
