@@ -1,6 +1,6 @@
 {
   "name": "pulumi-pretty",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "react component for rendering pulumi plans",
   "type": "module",
   "main": "dist/index.js",
