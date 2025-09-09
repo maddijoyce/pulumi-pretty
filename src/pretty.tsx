@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  mapPreviewDigest,
-  parsePreviewDigest,
-  PreviewDisplay,
-} from "./utils/parse";
+import { mapPreviewDigest, PreviewDisplay } from "./utils/parse";
 import z, { ZodError } from "zod";
 import { Loading } from "./components/loading";
 import { BasicDisplay } from "./components/basic";
 import { DigestDisplay } from "./components/digest";
 import { MediaProvider } from "./utils/media";
+import { parsePreviewDigest } from "./utils/schema";
 
 export const PrettyContent = ({ plan }: { plan: string }) => {
   const [computed, setComputed] = useState<{

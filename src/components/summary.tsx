@@ -1,5 +1,5 @@
 import { operationColors, operationLabels } from "../utils/operations";
-import { ResourceChanges, stepOpEnum } from "../utils/parse";
+import { ResourceChanges, stepOpEnum } from "../utils/schema";
 import { Text } from "./text";
 
 export const Summary = ({ changes }: { changes: ResourceChanges }) => {

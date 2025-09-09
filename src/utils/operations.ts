@@ -1,4 +1,4 @@
-import { StepOp } from "./parse";
+import { StepOp } from "./schema";
 
 export const unchangedOps: StepOp[] = [
   "same",

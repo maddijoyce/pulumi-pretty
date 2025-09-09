@@ -49,12 +49,18 @@ const darkLogos: Record<string, string> = {
   aws: awsDark,
 };
 
-export const Logo = ({ item }: { item?: string }) => {
+export const Logo = ({
+  item,
+  className,
+}: {
+  item?: string;
+  className?: string;
+}) => {
   const { isDark } = useMedia();
 
   if (!item) return null;
   const src = (isDark && darkLogos[item]) || logos[item];
   if (!src) return <Text>{item}</Text>;
 
-  return <img src={src} alt={item} className="size-4" />;
+  return <img src={src} alt={item} className={className || "size-4"} />;
 };
